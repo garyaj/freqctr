@@ -1,0 +1,12 @@
+# Clock Period Constraint, 16 MHz on-board clock
+NET "clk16"     LOC = C10   | IOSTANDARD = LVCMOS33 | PERIOD=62.50ns ;   # "clock"
+NET "clk12"     LOC = N9    | IOSTANDARD = LVCMOS33               ;   # CLK_12MHZ
+
+NET "d_data"    LOC = A14   | IOSTANDARD = LVCMOS33               ;   # BANK0_IO1 
+NET "d_clk"     LOC = C4    | IOSTANDARD = LVCMOS33               ;   # BANK0_IO2 
+NET "d_strobe"  LOC = A13   | IOSTANDARD = LVCMOS33               ;   # BANK0_IO3 
+#NET "test_sig"  LOC = B14   | IOSTANDARD = LVCMOS33               ;   # BANK0_IO4 
+NET "ref"       LOC = C13   | IOSTANDARD = LVCMOS33               ;   # BANK0_IO5 
+#NET "pps_in"    LOC = D13   | IOSTANDARD = LVCMOS33               ;   # BANK0_IO6 
+NET "pps_out"   LOC = A12   | IOSTANDARD = LVCMOS33               ;   # BANK0_IO7 
+NET "clk12_out" LOC = C12   | IOSTANDARD = LVCMOS33               ;   # CLK_12MHZ
