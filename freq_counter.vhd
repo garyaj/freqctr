@@ -21,7 +21,8 @@ end freq_count;
 architecture Behavioral of freq_count is
    COMPONENT clocking
    PORT(
-   CLKIN_IN : IN std_logic;
+   CLKIN_IN  : IN std_logic;
+	RST_IN    : IN std_logic;
    CLKFX_OUT : OUT std_logic;
    CLKFX180_OUT : OUT std_logic;
    CLKIN_IBUFG_OUT : OUT std_logic;
@@ -33,6 +34,7 @@ architecture Behavioral of freq_count is
    COMPONENT fast_domain
    PORT(
    clk       : IN std_logic;
+   clkn      : IN std_logic;
    test_sig  : IN std_logic;
    pps       : IN std_logic;
    bcd_count : OUT std_logic_vector(31 downto 0);
@@ -52,6 +54,7 @@ architecture Behavioral of freq_count is
    END COMPONENT;
 
    signal clk_fast      : std_logic;
+   signal clkn_fast     : std_logic;
    signal clk_slow      : std_logic;
    signal new_count     : std_logic;
    signal bcd_count     : std_logic_vector(31 downto 0);
@@ -64,8 +67,9 @@ begin
    
    Inst_clocking: clocking PORT MAP(
    CLKIN_IN => clk16,
+	RST_IN => '0',
    CLKFX_OUT => clk_fast,
-   CLKFX180_OUT => open,
+   CLKFX180_OUT => clkn_fast,
    CLKIN_IBUFG_OUT => open,
    CLK0_OUT => clk_slow,
    LOCKED_OUT => open
@@ -73,6 +77,7 @@ begin
    
 Inst_fast_domain: fast_domain PORT MAP(
    clk          => clk_fast,
+	clkn         => clkn_fast,
    test_sig     => test_sig,
    pps          => pps_in,
    bcd_count    => bcd_count,
